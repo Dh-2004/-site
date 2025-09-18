@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PRNG Implementation</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>PRNG Implementation</h1>
+    </header>
+
+    <main>
+        <section id="definition">
+            <h2>1. Definition & Purpose</h2>
+            <p>A <strong>Pseudo-Random Number Generator (PRNG)</strong> is an algorithm that produces a sequence of numbers that approximates the properties of random numbers. Unlike true random number generators, a PRNG is deterministic; if you start it with the same initial value (called a <strong>seed</strong>), it will always produce the same sequence. The purpose of a PRNG is to generate seemingly random data for various applications, from scientific simulations to video games and cryptography.</p>
+        </section>
+
+        <section id="strengths-weaknesses">
+            <h2>2. Strengths and Weaknesses</h2>
+            <div class="method-container">
+                <div class="method-box">
+                    <h3>Linear Congruential Generator (LCG)</h3>
+                    <p><strong>Strength:</strong> Extremely fast and simple to implement. Requires minimal memory, making it ideal for resource-constrained environments.</p>
+                    <p><strong>Weakness:</strong> The output sequence is predictable and has a short period. Not suitable for cryptographic applications due to its lack of security.</p>
+                </div>
+                <div class="method-box">
+                    <h3>Blum Blum Shub (BBS)</h3>
+                    <p><strong>Strength:</strong> A cryptographically secure PRNG (CSPRNG). Its security is based on the computational difficulty of factoring large numbers, making its output unpredictable.</p>
+                    <p><strong>Weakness:</strong> Extremely slow compared to LCG and other modern PRNGs. Requires large prime numbers and significant computational resources, limiting its practical use.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="simulation">
+            <h2>3. Simulation: Encryption & Decryption</h2>
+            <p>This simulation demonstrates the use of a simple PRNG for a stream cipher. The generated pseudo-random key is used to "encrypt" and "decrypt" a message using the XOR operation.</p>
+            <div class="simulation-container">
+                <div class="simulation-box">
+                    <h3>LCG Simulation</h3>
+                    <label for="lcg-message">Message:</label>
+                    <input type="text" id="lcg-message" value="HELLO" maxlength="10">
+                    <label for="lcg-key">Key (Seed):</label>
+                    <input type="number" id="lcg-key" value="5">
+                    <button onclick="runLcgSimulation()">Run LCG</button>
+                    <div class="result-box">
+                        <p><strong>Encrypted:</strong> <span id="lcg-encrypted"></span></p>
+                        <p><strong>Decrypted:</strong> <span id="lcg-decrypted"></span></p>
+                    </div>
+                </div>
+                <div class="simulation-box">
+                    <h3>BBS Simulation</h3>
+                    <p>This simulation uses a simpler XOR operation on the message.</p>
+                    <label for="bbs-message">Message:</label>
+                    <input type="text" id="bbs-message" value="HELLO" maxlength="10">
+                    <label for="bbs-p">Prime p:</label>
+                    <input type="number" id="bbs-p" value="0">
+                    <label for="bbs-q">Prime q:</label>
+                    <input type="number" id="bbs-q" value="0">
+                    <label for="bbs-seed">Seed:</label>
+                    <input type="number" id="bbs-seed" value="0">
+                    <button onclick="runBbsSimulation()">Run BBS</button>
+                    <div class="result-box">
+                        <p><strong>Encrypted:</strong> <span id="bbs-encrypted"></span></p>
+                        <p><strong>Decrypted:</strong> <span id="bbs-decrypted"></span></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="result">
+            <h2>4. Result & Conclusion</h2>
+            <p>The simulation highlights the core difference between the two generators. The LCG, being a simple PRNG, can be used for basic encryption, but its predictable nature makes it vulnerable. The BBS, while secure in theory, is too slow for practical use. The deterministic nature of both is evident in that the same inputs will always produce the same outputs.</p>
+        </section>
+    </main>
+    <script src="script.js"></script>
+</body>
+</html>
